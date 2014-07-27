@@ -1,7 +1,7 @@
 {
   "name": "acme/calculator-model",
   "autoload": {
-    "psr-0": { "Acle\\CalculatorModelBundle": "" }
+    "psr-0": { "Acme\\CalculatorModelBundle": "" }
   },
   "require": {
     "phpunit/phpunit": "3.7.*",
