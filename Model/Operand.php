@@ -3,16 +3,19 @@
 namespace Acme\CalculatorModelBundle\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class Operand
 {
     /**
      * @var double
      * @Serializer\Type("double")
+     * @Assert\Type("double")
+     * @Assert\NotNull()
      */
     protected $value;
 
-    function __construct($value)
+    function __construct($value = null)
     {
         $this->value = $value;
     }

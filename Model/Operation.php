@@ -30,7 +30,7 @@ class Operation
      */
     protected $result;
 
-    function __construct($operandA, $operandB, $operator, $result)
+    function __construct($operandA = null, $operandB = null, $operator = null, $result = null)
     {
         $this->operandA = $operandA;
         $this->operandB = $operandB;

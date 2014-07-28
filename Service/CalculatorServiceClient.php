@@ -10,23 +10,23 @@ use JMS\DiExtraBundle\Annotation as DI;
 class CalculatorServiceClient
 {
     /**
-     * @param string $operandA
-     * @param string $operandB
-     * @param string $operator
-     * @return \Acme\CalculatorModelBundle\Model\Operation
+     * @param \Acme\CalculatorModelBundle\Model\Operand $operandA
+     * @param \Acme\CalculatorModelBundle\Model\Operand $operandB
+     * @param \Acme\CalculatorModelBundle\Model\Operator\Operator $operator
+     * @return \Acme\CalculatorModelBundle\Model\Result
      */
     public function compute($operandA, $operandB, $operator)
     {
         $client = $this->guzzleClientProvider->getClient($this->endpoint . $this->uriPattern, [
-                "operandA" => $operandA,
-                "operandB" => $operandB,
-                "operator" => $operator
+                "operandA" => $operandA->getValue(),
+                "operandB" => $operandB->getValue(),
+                "operator" => $operator->getId()
         ]);
         $request = $client->get();
         try {
             $response = $request->send();
             if ($response->getStatusCode() === 200) {
-                return $this->serializer->deserialize($response->getBody(true), "Acme\CalculatorModelBundle\Model\Operation", "json");
+                return $this->serializer->deserialize($response->getBody(true), "Acme\CalculatorModelBundle\Model\Result", "json");
             }
         }
         catch(\Exception $e){}
