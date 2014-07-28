@@ -34,7 +34,7 @@ class CalculatorServiceClient
     }
 
     /**
-     * @DI\Inject("acme.internal.guzzle.provider")
+     * @DI\Inject("acme.internal.guzzle.provider.cache")
      * @var \Acme\CalculatorModelBundle\Service\GuzzleClientProvider
      */
     public $guzzleClientProvider;

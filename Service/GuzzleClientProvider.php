@@ -2,6 +2,10 @@
 
 namespace Acme\CalculatorModelBundle\Service;
 
+use Doctrine\Common\Cache\ApcCache;
+use Guzzle\Cache\DoctrineCacheAdapter;
+use Guzzle\Plugin\Cache\CachePlugin;
+use Guzzle\Plugin\Cache\DefaultCacheStorage;
 use Guzzle\Service\Client;
 use JMS\DiExtraBundle\Annotation as DI;
 
@@ -40,5 +44,10 @@ class GuzzleClientProvider {
     public function addPlugin($plugin)
     {
         $this->plugins[] = $plugin;
+    }
+
+    public function addCachePlugin()
+    {
+        $this->addPlugin(new CachePlugin(['storage' => new DefaultCacheStorage(new DoctrineCacheAdapter(new ApcCache()))]));
     }
 } 
